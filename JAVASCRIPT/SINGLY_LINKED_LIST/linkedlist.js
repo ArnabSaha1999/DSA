@@ -240,6 +240,7 @@ class LinkedList{
         }
     }
 }
+// creating object of the LinkedList class
 const linkedList = new LinkedList();
 linkedList.append(3);
 linkedList.append(2);
@@ -257,16 +258,15 @@ console.log(linkedList.headNode());
 console.log(linkedList.tailNode());
 linkedList.display();
 linkedList.search(88)
-// linkedList.reverse();
-// console.log('after reversing');
-// console.log(linkedList.headNode());
-// console.log(linkedList.tailNode());
-// linkedList.display();
-// // linkedList.append(0);
-//
-// console.log('after sorting')
-// linkedList.sort();
-// console.log('after reversing again');
-// linkedList.reverse();
-// linkedList.display();
+linkedList.reverse();
+console.log('after reversing');
+console.log(linkedList.headNode());
+console.log(linkedList.tailNode());
+linkedList.display();
+linkedList.append(0);
+console.log('after sorting')
+linkedList.sort();
+console.log('after reversing again');
+linkedList.reverse();
+linkedList.display();
 console.log("Length of the Linked List " + linkedList.linkedListLength());
