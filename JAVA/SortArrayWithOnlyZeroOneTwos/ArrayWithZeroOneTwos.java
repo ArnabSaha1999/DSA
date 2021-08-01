@@ -25,6 +25,9 @@ public class ArrayWithZeroOneTwos {
                     break;
             }
         }
+        printArray(a);
+    }
+    private void printArray (int[] a) {
         for(int i:a){
             System.out.print(i + " ");
         }
