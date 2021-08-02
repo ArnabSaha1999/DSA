@@ -247,7 +247,7 @@ public:
     int linkedListLength () {
         return this->length;
     }
-
+private:
     // checks if the linked list is empty or not
     bool isEmpty () {
         if(this->head == nullptr) {
