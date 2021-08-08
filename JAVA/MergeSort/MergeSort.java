@@ -36,8 +36,8 @@ class MergeSort {
             k++;
         }
 
-        for(int it = left ; it <= right ; it++) {
-            arr[it] = mergedArray[it];
+        for(k = left ; k <= right ; k++) {
+            arr[k] = mergedArray[k];
         }
     }
     public void printArray(int[] arr) {
