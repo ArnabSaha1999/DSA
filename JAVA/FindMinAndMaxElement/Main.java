@@ -1,7 +1,7 @@
 public class Main {
 
     public static void main(String[] args) {
-        int[] arr = {1,2};
+        int[] arr = {1,2,3,4,5,6};
 	    MinAndMaxPair pair = new MinAndMaxPair();
 	    Pair minMax = pair.findMinAndMax(arr , arr.length);
         System.out.println("The Min element is : " + minMax.min);
