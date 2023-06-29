@@ -41,10 +41,9 @@ void bubbleSortRecursive(vector<int> &arr, int n) {
 
 // Function to print the array
 void print(vector<int> &arr, int n) {
-    for(int i = 0; i < n; i++) {
-        cout<<arr[i]<< " ";
-    }
-    cout<<endl;
+    for(int a : arr) {
+        cout<<a<<" ";
+    }cout<<endl;
 }
 
 int main() {
