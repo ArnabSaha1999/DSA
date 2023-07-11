@@ -54,4 +54,5 @@ int compressModified(vector<char> &chars) {
 int main() {
     vector<char> chars = {'a', 'a', 'b', 'b', 'c', 'c', 'c'};
     cout<<"The new length of the compressed array: "<<compressModified(chars)<<endl;
+    return 0;
 }
