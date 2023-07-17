@@ -53,6 +53,17 @@ bool searchMatrixDivideAndConquer(vector<vector<int>> &matrix, int target) {
 
 }
 
+void printMatrix(vector<vector<int>> &matrix) {
+    int rows = matrix.size();
+    int cols = matrix[0].size();
+    cout<<"The row-wise representation of the Matrix: "<<endl;
+    for(int r = 0; r < rows; r++) {
+        for(int c = 0; c < cols; c++) {
+            cout<<matrix[r][c]<<" ";
+        } cout<<endl;
+    }
+}
+
 int main() {
     vector<vector<int>> matrix = {
         {1, 4, 7, 11, 15},
@@ -62,7 +73,7 @@ int main() {
         {18,21,23,26, 30}
     };
     int target = 9;
-
+    printMatrix(matrix);
     cout<<"Using the Linear search approach"<<endl;
     if(searchMatrix(matrix, target)) {
         cout<<"The target "<<target<<" is present in the matrix"<<endl;
