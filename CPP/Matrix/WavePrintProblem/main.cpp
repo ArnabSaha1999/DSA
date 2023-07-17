@@ -23,12 +23,24 @@ vector<int> wavePrint(vector<vector<int>> matrix, int rows, int cols) {
     return ans;
 }
 
+void printMatrix(vector<vector<int>> &matrix) {
+    int rows = matrix.size();
+    int cols = matrix[0].size();
+    cout<<"The row-wise representation of the Matrix: "<<endl;
+    for(int r = 0; r < rows; r++) {
+        for(int c = 0; c < cols; c++) {
+            cout<<matrix[r][c]<<" ";
+        } cout<<endl;
+    }
+}
+
 int main() {
     vector<vector<int>> matrix = {
         {13,34,33},
         {39,54,11},
         {18,22,27}
     };
+    printMatrix(matrix);
     int rows = matrix.size();
     int cols = matrix[0].size();
     vector<int> ans = wavePrint(matrix, rows, cols);
