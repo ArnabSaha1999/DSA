@@ -35,6 +35,17 @@ bool searchMatrixBinarySearch(vector<vector<int>> &matrix, int target) {
     return false;
 }
 
+void printMatrix(vector<vector<int>> &matrix) {
+    int rows = matrix.size();
+    int cols = matrix[0].size();
+    cout<<"The row-wise representation of the Matrix: "<<endl;
+    for(int r = 0; r < rows; r++) {
+        for(int c = 0; c < cols; c++) {
+            cout<<matrix[r][c]<<" ";
+        } cout<<endl;
+    }
+}
+
 int main() {
     vector<vector<int>> matrix = {
         {13,14,23,33},
@@ -44,6 +55,7 @@ int main() {
         
     };
     int target = 98;
+    printMatrix(matrix);
     cout<<"Using the Linear search approach"<<endl;
     if(searchMatrix(matrix, target)) {
         cout<<"The target "<<target<<" is present in the matrix"<<endl;
