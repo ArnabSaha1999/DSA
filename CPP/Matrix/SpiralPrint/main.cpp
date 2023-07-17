@@ -41,6 +41,17 @@ vector<int> spiralPrint(vector<vector<int>> matrix) {
     return ans;
 }
 
+void printMatrix(vector<vector<int>> &matrix) {
+    int rows = matrix.size();
+    int cols = matrix[0].size();
+    cout<<"The row-wise representation of the Matrix: "<<endl;
+    for(int r = 0; r < rows; r++) {
+        for(int c = 0; c < cols; c++) {
+            cout<<matrix[r][c]<<" ";
+        } cout<<endl;
+    }
+}
+
 int main() {
     vector<vector<int>> matrix = {
         {13,34,33,43},
@@ -49,6 +60,7 @@ int main() {
         {19,23,88,10}
         
     };
+    printMatrix(matrix);
     int rows = matrix.size();
     int cols = matrix[0].size();
     vector<int> ans = spiralPrint(matrix);
