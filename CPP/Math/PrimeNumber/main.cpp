@@ -40,7 +40,7 @@ int countPrimes(int n) {
     return count;
 }
 
-// Count the prime numbers up to n using Sieve of Eratosthenes
+//Approach 3: Count the prime numbers up to n using Sieve of Eratosthenes
 bool countPrimesSieveOfEratosthenes(int n) {
     if(n <= 1) {
         return 0;
