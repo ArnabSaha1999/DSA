@@ -27,6 +27,7 @@ void findPowerSet(vector<int>& nums, vector<int>& output, int index, vector<vect
         output.push_back(nums[i]);
         findPowerSet(nums, output, i + 1, ans);
         output.pop_back();
+    }
 }
 
 vector<vector<int>> subsets(vector<int>& nums) {
