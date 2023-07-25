@@ -3,17 +3,19 @@
 
 using namespace std;
 
-void solve(vector<int> nums, vector<int> output, int index, vector<vector<int> >& ans) {
-    //base case
+//Function to find the power set using backtracking
+void solve(vector<int> nums, vector<int> output, int index, vector<vector<int>>& ans) {
+    // Base case: If the index is greater than or equal to the size of the input set,
+    // we have considered all elements, so we add the current subset to the answer.
     if(index >= nums.size()) {
         ans.push_back(output);
         return ;
     }
     
-    //exclude
+    // Exclude the current element and continue exploring other elements in the set
     solve(nums, output, index+1, ans);
     
-    //include
+    // Include the current element in the subset and continue exploring other elements
     int element = nums[index];
     output.push_back(element);
     solve(nums, output, index+1, ans);
