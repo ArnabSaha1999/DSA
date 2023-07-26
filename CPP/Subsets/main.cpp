@@ -101,7 +101,7 @@ int main() {
     }
     cout<<"}"<<endl;
 
-    vector<vector<int>> ans = subsets(arr);
+    vector<vector<int>> ans = subsetsBitwise(arr);
     cout<<"The Subsets of the array: "<<endl<<"{";
     for(auto &i : ans) {
         printArray(i);
