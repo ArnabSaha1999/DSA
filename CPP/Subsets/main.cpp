@@ -33,7 +33,27 @@ vector<vector<int>> subsets(vector<int>& nums) {
     
 }
 
-//Approach 2: Function to find the power set using the Bitwise approach 
+//Function to find the power set using backtracking
+void findSubset(vector<int> nums, vector<int> output, int index, vector<vector<int>> &ans) {
+    ans.push_back(output); // Add the current subset to the answer
+    // Explore elements starting from the given index
+    for(int i = index; i < nums.size(); i++) {
+        output.push_back(nums[i]); // Include the current element in the subset
+        findSubset(nums, output, i + 1, ans); // Continue exploring other elements
+        output.pop_back(); // Backtrack: Remove the last added element from the subset
+    }
+}
+
+//Approach 2: Function to find all subsets using backtracking (Alternative implementation)
+vector<vector<int>> subsetBackTracking(vector<int> &nums) {
+    vector<vector<int>> ans;
+    vector<int> output;
+    int index = 0;
+    findSubset(nums, output, index, ans);
+    return ans;
+}
+
+//Approach 3: Function to find the power set using the Bitwise approach 
 vector<vector<int>> subsetsBitwise(vector<int> &nums) {
     int totalSubsets = 1 << nums.size();
     vector<vector<int>> ans;
@@ -68,8 +88,15 @@ int main() {
     vector<int> arr = {1,2,3};
 
     vector<vector<int>> ans_backtracking = subsets(arr);
-    cout<<"The Subsets of the array (Backtracking approach): "<<endl<<"{";
+    cout<<"The Subsets of the array Backtracking approach: "<<endl<<"{";
     for (auto &i : ans_backtracking) {
+        printArray(i);
+    }
+    cout<<"}"<<endl;
+
+    vector<vector<int>> res = subsetBackTracking(arr);
+    cout<<"The Subsets of the array Backtracking approach - Alternative: "<<endl<<"{";
+    for (auto &i : res) {
         printArray(i);
     }
     cout<<"}"<<endl;
