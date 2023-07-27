@@ -36,7 +36,29 @@ vector<string> subsequences(string str) {
     
 }
 
-//Approach 2: Function to find the power set of a string using the Bitwise approach
+// Backtracking approach to find all possible subsequences of the input string 'str' alternative implementation
+void findSubsequences(string str, string output, int index, vector<string> &ans) {
+    // Add the current subset to the answer, excluding the empty string
+    if(!output.empty())
+        ans.push_back(output);
+    // Explore other characters in the string
+    for(int i = index; i < str.length(); i++) {
+        output.push_back(str[i]);
+        findSubsequences(str, output, i + 1, ans);
+        output.pop_back();
+    }
+}
+
+//Approach 2: Function to find all subsequences of a given string using backtracking approach alternative implementation
+vector<string> subsequencesBackTracking(string str) {
+    vector<string> ans;
+    string output = "";
+    int index = 0;
+    findSubsequences(str, output, index, ans);
+    return ans;
+}
+
+//Approach 3: Function to find the power set of a string using the Bitwise approach
 vector<string> subsequencesBitwise(string str) {
     int totalSubsets = (1 << str.length());
     vector<string> ans;
@@ -61,8 +83,15 @@ int main() {
     string str = "abc";
 
     vector<string> ans_backTracking = subsequences(str);
-    cout<<"The Subsequences of the string: "<<str<<" using the (Backtracking approach): "<<endl<<"{";
+    cout<<"The Subsequences of the string: "<<str<<" using the Backtracking approach: "<<endl<<"{";
     for (string i : ans_backTracking) {
+        cout<<i<<" ";
+    }
+    cout<<"}"<<endl;
+
+    vector<string> res = subsequencesBackTracking(str);
+    cout<<"The Subsequences of the string: "<<str<<" using the Alternative - Backtracking approach: "<<endl<<"{";
+    for (string i : res) {
         cout<<i<<" ";
     }
     cout<<"}"<<endl;
