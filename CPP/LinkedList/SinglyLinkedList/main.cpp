@@ -11,12 +11,6 @@ public:
         this->next = nullptr;
     }
 
-    // Destructor to clean up memory recursively
-    ~Node() {
-        while(this->next != nullptr) {
-            delete next;
-        }
-    }
 };
 
 // A LinkedList class with pointer head and tail
