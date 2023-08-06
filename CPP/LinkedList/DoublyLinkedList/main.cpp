@@ -13,11 +13,6 @@ public:
         this->next = this->prev = nullptr;
     }
 
-    // Destructor to clean up memory recursively
-    ~Node() {
-        delete next;
-        delete prev;
-    }
 };
 
 // A DoublyLinkedList class with pointer head and tail.
