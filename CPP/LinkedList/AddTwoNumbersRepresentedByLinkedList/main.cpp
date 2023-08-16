@@ -80,7 +80,7 @@ public:
 
     }
 
-    // Adds two numbers represented by linked lists iteratively
+    //Approach 1: Adds two numbers represented by linked lists iteratively
     Node* addTwoNumbers(Node* l1, Node* l2) {
         //If first linked list is empty then return second list as answer
         if(l1 == NULL) {
@@ -116,7 +116,7 @@ public:
         return ansHead;
     }
 
-    // Add two numbers represented by linked lists recursively
+    //Approach 2: Add two numbers represented by linked lists recursively
     Node* addTwoNumbersRecursively(Node* l1, Node* l2, int carry = 0) {
         // Base case: both linked lists are empty and no carry
         if(!l1 && !l2 && carry == 0) {
