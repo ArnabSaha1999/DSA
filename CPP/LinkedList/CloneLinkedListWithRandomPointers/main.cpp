@@ -81,6 +81,7 @@ public:
         cout << endl;
     }
 
+    //Function to connect Random pointers the nodes
     void connectRandomPointer(Node* &head) {
         Node* currNode = head;
 
@@ -92,7 +93,7 @@ public:
         currNode->next->next->next->next->next->random = currNode->next;
     }
     
-    
+    // Adds a new node at the end of the linked list
     void pushAtTail(Node* &head, Node* &tail, int val) {
         Node* newNode = new Node(val);
         if(head == NULL) {
@@ -139,7 +140,7 @@ public:
         return cloneHead;
     }
 
-    // Copy the linked list with random pointers (optimized approach)
+    //Approach 2: Copy the linked list with random pointers (optimized approach)
     Node* copyRandomList(Node* &head) {
         Node* originalNode = head;
         Node *cloneHead = NULL, *cloneTail = NULL;
