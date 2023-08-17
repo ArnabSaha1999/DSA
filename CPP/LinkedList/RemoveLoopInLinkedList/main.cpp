@@ -23,7 +23,7 @@ void display(Node* head) {
     cout<<"NULL"<<endl;
 }
 
-// Approach: Hash Set (unordered_map) for Cycle Detection
+// Approach 1: Hash Set (unordered_map) for Cycle Detection
 // Time Complexity: O(n), where n is the number of nodes in the linked list
 // Space Complexity: O(n), a hash map is used to store visited nodes
 Node* detectCycleHashMap(Node* &head) {
