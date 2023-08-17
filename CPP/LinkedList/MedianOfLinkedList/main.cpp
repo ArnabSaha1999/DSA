@@ -74,10 +74,17 @@ public:
     // Time Complexity: O(N), where N is the length of the linked list.
     // Space Complexity: O(1), as it uses a constant amount of extra space.
     Node* findMiddleBruteForce(Node* head) {
-        // Calculate the middle index.
-        int mid = (this->length / 2);
-        int count = 0;
+        // Calculate the length of Linked List
         Node* currNode = head;
+        int length = 0;
+        while(currNode != NULL) {
+            length++;
+            currNode = currNode->next;
+        }
+        // Calculate the middle index.
+        int mid = length / 2;
+        int count = 0;
+        currNode = head;
         while(count != mid) {
             count++; // Increment the count.
             currNode = currNode->next; // Move the current node
@@ -85,7 +92,6 @@ public:
         // Set the head to the middle node.
         head = currNode;
         return head;
-
     }
 
     //Approach 2: Optimized way to find the middle using the two-pointer approach.
