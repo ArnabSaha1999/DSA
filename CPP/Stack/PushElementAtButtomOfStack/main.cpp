@@ -44,7 +44,7 @@ stack<int> pushAtBottomIteratively(stack<int> &inputStack, int val) {
 }
 
 int main() {
-    stack<int> st, st1;
+    stack<int> st, st1, st2;
     st.push(1);
     st.push(2);
     st.push(3);
@@ -53,6 +53,8 @@ int main() {
     st.push(6);
 
     st1 = st;
+    st2 = st;
+
     cout<<"The Stack elements: "<<endl;
     while(!st1.empty()) {
         cout<<st1.top()<<" ";
@@ -60,10 +62,17 @@ int main() {
     } cout<<endl;
 
     st = pushAtBottomIteratively(st, 0);
-    cout<<"After adding element at the bottom of Stack: "<<endl;
+    cout<<"After adding element at the bottom of Stack using Iterative approach: "<<endl;
     while(!st.empty()) {
         cout<<st.top()<<" ";
         st.pop();
+    } cout<<endl;
+
+    st2 = pushAtBottomRecusively(st2, 0);
+    cout<<"After adding element at the bottom of Stack Recursive approach: "<<endl;
+    while(!st2.empty()) {
+        cout<<st2.top()<<" ";
+        st2.pop();
     } cout<<endl;
 
     return 0;
