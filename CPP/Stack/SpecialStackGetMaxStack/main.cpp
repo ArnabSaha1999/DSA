@@ -5,7 +5,7 @@
 
 using namespace std;
 
-// MaxStack class using two stacks to track maximum value
+//Approach 1: MaxStack class using two stacks to track maximum value
 class MaxStack {
     stack<int> st, maxStack;
     int maxi = INT_MIN;
@@ -57,7 +57,7 @@ public:
     }
 };
 
-// MaxStackDifference class using a single stack and difference to track maximum value
+//Approach 2: MaxStackDifference class using a single stack and difference to track maximum value
 class MaxStackDifference {
     stack<int> st;
     int maxi = INT_MIN;
@@ -120,7 +120,7 @@ public:
     }
 };
 
-// SpecialStackPair class using pairs to track both the element and the maximum value
+//Approach 3: SpecialStackPair class using pairs to track both the element and the maximum value
 class SpecialStackPair {
     stack<pair<int, int>> st;
     int maxi = INT_MIN;
