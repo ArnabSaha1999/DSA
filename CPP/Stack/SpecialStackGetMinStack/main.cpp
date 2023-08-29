@@ -5,7 +5,7 @@
 
 using namespace std;
 
-// MinStack class using two stacks to track minimum value
+//Approach 1: MinStack class using two stacks to track minimum value
 class MinStack {
     stack<int> st, minStack;
     int mini = INT_MAX;
@@ -57,7 +57,7 @@ public:
     }
 };
 
-// MinStackDifference class using a single stack and difference to track minimum value
+//Approach 2: MinStackDifference class using a single stack and difference to track minimum value
 class MinStackDifference {
     stack<int> st;
     int mini = INT_MAX;
@@ -120,7 +120,7 @@ public:
     }
 };
 
-// SpecialStackPair class using pairs to track both the element and the minimum value
+//Approach 3: SpecialStackPair class using pairs to track both the element and the minimum value
 class SpecialStackPair {
     stack<pair<int, int>> st;
     int mini = INT_MAX;
