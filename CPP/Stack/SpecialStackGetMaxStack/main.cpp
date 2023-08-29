@@ -209,10 +209,10 @@ int main() {
 
     cout << "SpecialStackPair:" << endl;
     cout << "Top: " << pairStack.getTop() << endl;
-    cout << "Min: " << pairStack.getMax() << endl;
+    cout << "Max: " << pairStack.getMax() << endl;
     cout << "Pop: " << pairStack.pop() << endl;
     cout << "Top: " << pairStack.getTop() << endl;
-    cout << "Min: " << pairStack.getMax() << endl;
+    cout << "Max: " << pairStack.getMax() << endl;
 
     return 0;
 }
