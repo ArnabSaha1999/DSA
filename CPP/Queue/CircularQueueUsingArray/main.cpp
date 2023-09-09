@@ -111,8 +111,8 @@ int main() {
 
     cout<<"The popped element: "<<cq.deQueue()<<endl;
 
-    cout<<cq.getFront()<<endl;
-    cout<<cq.getRear()<<endl;
+    cout<<"The Front Element: "<<cq.getFront()<<endl;
+    cout<<"The Rear Element: "<<cq.getRear()<<endl;
 
     cq.enQueue(6);
 
