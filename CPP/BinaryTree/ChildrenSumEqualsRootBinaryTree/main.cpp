@@ -54,39 +54,82 @@ void levelOrderTraversal(Node* root) {
     }
 }
 
+//Approach 1: Recursive approach to check if a binary tree is a sum tree
 bool sumTreeRecursive(Node* root) {
+    // Base case: If the node is null, it's considered a sum tree.
     if(!root) {
         return true;
     }
+    // Base case: If the node is a leaf node, it's considered a sum tree.
     if(!root->left && !root->right) {
         return true;
     }
+    // Recursively check the left and right subtrees.
     bool leftSumTree = sumTreeRecursive(root->left);
     bool rightSumTree = sumTreeRecursive(root->right);
+    // Calculate the sum of left and right child nodes.
     int leftSum = (root->left) ? root->left->value : 0;
     int rightSum = (root->right) ? root->right->value : 0;
+    // Check if the current node is a sum tree based on the sum of its children and recursively checked subtrees.
     return (root->value == leftSum + rightSum) && leftSumTree && rightSumTree;
 }
 
+//Approach 2: Iterative approach using a queue to check if a binary tree is a sum tree
 bool sumTreeIterative(Node* root) {
+    // Base case: If the tree is empty, it's considered a sum tree.
     if(!root) {
         return true;
     }
+    // Create a queue for level-order traversal.
     queue<Node*> q;
     q.push(root);
+    // Perform level-order traversal of the tree.
     while(!q.empty()) {
         Node* currNode = q.front();
         q.pop();
+        // If the current node is a leaf node, continue to the next node.
         if(!currNode->left && !currNode->right) {
             continue;
         } 
+        // Check if the current node is a sum tree based on its children.
         if((!currNode->left && (currNode->value != currNode->right->value)) || (!currNode->right && (currNode->value != currNode->left->value)) || (currNode->value != currNode->left->value + currNode->right->value)) {
             return false;
         }
+        // Add the left and right children to the queue for further processing.
         q.push(currNode->left);
         q.push(currNode->right);
     }
+    // If the loop completes without returning false, the entire tree is a sum tree.
     return true;
+}
+
+// Helper function for the optimized recursive approach
+pair<bool, int> sumTreeHelper(Node* root) {
+    // Base case: If the node is null, it's considered a sum tree.
+    if(!root) {
+        return make_pair(true, 0);
+    }
+    // Base case: If the node is a leaf node, it's considered a sum tree with its value.
+    if(!root->left && !root->right) {
+        return make_pair(true, root->value);
+    }
+    // Recursively check the left and right subtrees.
+    pair<bool, int> leftTree = sumTreeHelper(root->left);
+    pair<bool, int> rightTree = sumTreeHelper(root->right);
+    // Check if the current node is a sum tree based on the sum of its children and recursively checked subtrees.
+    bool equals = (root->value == leftTree.second + rightTree.second);
+
+    if(leftTree.first && rightTree.first && equals) {
+        return make_pair(true, root->value);
+    } 
+    // If any condition fails, return false to indicate it's not a sum tree.
+    return make_pair(false, 0);
+}
+
+//Approach 3: Optimized recursive approach to check if a binary tree is a sum tree
+bool sumTreeOptimized(Node* root) {
+    // Call the helper function to perform the check and return the result.
+    return sumTreeHelper(root).first;
 }
 
 // Function to delete the binary tree to free memory
@@ -124,12 +167,12 @@ int main() {
         cout<<"The Binary tree is not a Sum tree"<<endl;
     }
 
-    // cout<<"Using the Optimized Recursive approach: "<<endl;
-    // if(isBalancedOptimized(root)) {
-    //     cout<<"The Binary tree is a Sum tree"<<endl;
-    // } else {
-    //     cout<<"The Binary tree is not a Sum tree"<<endl;
-    // }
+    cout<<"Using the Optimized Recursive approach: "<<endl;
+    if(sumTreeOptimized(root)) {
+        cout<<"The Binary tree is a Sum tree"<<endl;
+    } else {
+        cout<<"The Binary tree is not a Sum tree"<<endl;
+    }
     
     // Clean up memory by deleting the nodes
     deleteTree(root);
@@ -159,12 +202,12 @@ int main() {
         cout<<"The Binary tree is not a Sum tree"<<endl;
     }
 
-    // cout<<"Using the Optimized Recursive approach: "<<endl;
-    // if(isBalancedOptimized(root)) {
-    //     cout<<"The Binary tree is a Sum tree"<<endl;
-    // } else {
-    //     cout<<"The Binary tree is not a Sum tree"<<endl;
-    // }
+    cout<<"Using the Optimized Recursive approach: "<<endl;
+    if(sumTreeOptimized(root)) {
+        cout<<"The Binary tree is a Sum tree"<<endl;
+    } else {
+        cout<<"The Binary tree is not a Sum tree"<<endl;
+    }
 
     // Clean up memory by deleting the nodes
     deleteTree(root);
