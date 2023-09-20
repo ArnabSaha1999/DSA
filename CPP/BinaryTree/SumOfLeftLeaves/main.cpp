@@ -138,6 +138,8 @@ int main() {
     cout<<"The Sum of Left Leaves using the Recursive approach: "<<sumOfLeftLeavesRecursively(root)<<endl;
     cout<<"The Sum of Left Leaves Using the Iterative approach: "<<sumOfLeftLeavesIteratively(root)<<endl;
 
-    return 0;
+    // Clean up memory by deleting the nodes
+    deleteTree(root);
     
+    return 0;
 }
