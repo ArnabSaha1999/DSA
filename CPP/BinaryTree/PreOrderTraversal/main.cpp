@@ -63,6 +63,46 @@ vector<int> preOrderTraversalIteratively(Node* root) {
     return ans;
 }
 
+//Approach 3: Morris Traversal Algorithm to perform an iterative Preorder traversal of a binary tree
+vector<int> preOrderMorrisTraversal(Node* root) {
+    // Create a vector to store the preorder traversal result
+    vector<int> ans;
+    // Check if the root is null (empty tree)
+    if(!root) {
+        return ans;
+    }
+    // Start from the root node
+    Node* currNode = root;
+    while(currNode) {
+        if(!currNode->left) {
+            // If the current node has no left child, visit it and move to its right child
+            ans.push_back(currNode->value);
+            currNode = currNode->right;
+        } else {
+            // If the current node has a left child, find its in-order predecessor
+            Node* predecessor = currNode->left;
+            // Traverse to the rightmost node of the left subtree if not visited already
+            while(predecessor->right && predecessor->right != currNode) {
+                predecessor = predecessor->right;
+            }
+            // If the predecessor's right child is not assigned, visit the current node,
+            // and then assign it to the predecessor's right child. Finally, move to the left child
+            if(!predecessor->right) {
+                ans.push_back(currNode->value);
+                predecessor->right = currNode;
+                currNode = currNode->left;
+            } else {
+                // If the predecessor's right child is already assigned, reset it to nullptr,
+                // and move to the right child of the current node
+                predecessor->right = nullptr;
+                currNode = currNode->right;
+            }
+        }
+    }
+    // Return the preorder traversal result
+    return ans;
+}
+
 // Function to delete the binary tree to free memory
 void deleteTree(Node* root) {
     if (!root) {
@@ -94,6 +134,12 @@ int main() {
 
     cout<<"The Preorder Traversal Of Binary Tree Iteratively: "<<endl;
     ans = preOrderTraversalIteratively(root);
+    for(int a : ans) {
+        cout<<a<<" ";
+    } cout<<endl;
+
+    cout<<"The Preorder Traversal Of Binary Tree Iterative Morris Traversal: "<<endl;
+    ans = preOrderMorrisTraversal(root);
     for(int a : ans) {
         cout<<a<<" ";
     } cout<<endl;
