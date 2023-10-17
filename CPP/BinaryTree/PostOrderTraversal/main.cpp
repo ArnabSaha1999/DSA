@@ -65,6 +65,55 @@ vector<int> postOrderTraversalIteratively(Node* root) {
     return ans;
 }
 
+// Helper function to reverse the order of elements in a vector
+vector<int> reverse(vector<int> &ans, int size) {
+    for(int start = 0, end = size - 1; start < end; start++, end--) {
+        int temp = ans[start];
+        ans[start] = ans[end];
+        ans[end] = temp;
+    }
+    return ans;
+}
+
+//Approach 3: Morris Traversal Algorithm to perform an iterative Postorder traversal of a binary tree
+vector<int> postOrderMorrisTraversal(Node* root) {
+    vector<int> ans;
+    // Check if the root is null (empty tree)
+    if(!root) {
+        return ans;
+    }
+    // Start from the root node
+    Node* currNode = root;
+    while(currNode) {
+        if(!currNode->right) {
+            // If the current node has no right child, visit it and move to its left child
+            ans.push_back(currNode->value);
+            currNode = currNode->left;
+        } else {
+            // If the current node has a right child, find its in-order predecessor
+            Node* predecessor = currNode->right;
+            // Traverse to the leftmost node of the right subtree if not visited already
+            while(predecessor->left && predecessor->left != currNode) {
+                predecessor = predecessor->left;
+            }
+            // If the predecessor's left child is not assigned, assign it to the current node,
+            // visit the current node, and then move to the right child
+            if(!predecessor->left) {
+                predecessor->left = currNode;
+                ans.push_back(currNode->value);
+                currNode = currNode->right;
+            } else {
+                // If the predecessor's left child is already assigned, reset it to nullptr,
+                // and move to the left child of the current node
+                predecessor->left = nullptr;
+                currNode = currNode->left;
+            }
+        }
+    }
+    // Reverse the result vector to get the postorder traversal order
+    return reverse(ans, ans.size());
+}
+
 // Function to delete the binary tree to free memory
 void deleteTree(Node* root) {
     if (!root) {
@@ -96,6 +145,12 @@ int main() {
 
     cout<<"The Postorder Traversal Of Binary Tree Iteratively: "<<endl;
     ans = postOrderTraversalIteratively(root);
+    for(int a : ans) {
+        cout<<a<<" ";
+    } cout<<endl;
+
+    cout<<"The Postorder Traversal Of Binary Tree Iterative Morris Traversal: "<<endl;
+    ans = postOrderMorrisTraversal(root);
     for(int a : ans) {
         cout<<a<<" ";
     } cout<<endl;
