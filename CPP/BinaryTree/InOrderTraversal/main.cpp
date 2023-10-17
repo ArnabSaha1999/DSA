@@ -60,6 +60,44 @@ vector<int> inOrderTraversalIterative(Node* root) {
     return ans;
 }
 
+//Approach 3: Morris Traversal Algorithm to perform an iterative inorder traversal of a binary tree
+vector<int> inOrderMorrisTraversal(Node* root) {
+    // Create a vector to store the inorder traversal result
+    vector<int> ans;
+    // Check if the root is null (empty tree)
+    if(!root) {
+        return ans;
+    }
+    // Start from the root node
+    Node* currNode = root;
+    while(currNode) {
+        // If the current node has no left child, visit it and move to its right child
+        if(!currNode->left) {
+            ans.push_back(currNode->value);
+            currNode = currNode->right;
+        } else {
+            // If the current node has a left child, find its in-order predecessor
+            Node* predecessor = currNode->left;
+            // Traverse to the rightmost node of the left subtree if not visited already
+            while(predecessor->right && predecessor->right != currNode) {
+                predecessor = predecessor->right;
+            }
+            // If the predecessor's right child is not assigned, assign it to the current node
+            if(!predecessor->right) {
+                predecessor->right = currNode;
+                currNode = currNode->left;
+            } else {
+                // If the predecessor's right child is already assigned, visit the current node and then move to its right child
+                predecessor->right = nullptr;
+                ans.push_back(currNode->value);
+                currNode = currNode->right;
+            }
+        }
+    }
+    // Return the inorder traversal result
+    return ans;
+}
+
 // Function to delete the binary tree to free memory
 void deleteTree(Node* root) {
     if (!root) {
@@ -91,6 +129,12 @@ int main() {
 
     cout<<"The Inorder Traversal Of Binary Tree Iteratively: "<<endl;
     ans = inOrderTraversalIterative(root);
+    for(int a : ans) {
+        cout<<a<<" ";
+    } cout<<endl;
+
+    cout<<"The Inorder Traversal Of Binary Tree Iterative Morris Traversal: "<<endl;
+    ans = inOrderMorrisTraversal(root);
     for(int a : ans) {
         cout<<a<<" ";
     } cout<<endl;
