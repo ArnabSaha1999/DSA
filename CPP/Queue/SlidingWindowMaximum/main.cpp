@@ -1,5 +1,6 @@
 #include<iostream>
 #include<vector>
+#include<queue>
 #include<deque>
 
 using namespace std;
@@ -48,6 +49,27 @@ vector<int> maxSlidingWindow(vector<int> &nums, int k) {
     return ans;
 }
 
+//Approach 3: Function to find the maximum element in each sliding window of size 'k' using max heap approach
+vector<int> maxSlidingWindowMaxHeap(vector<int>& nums, int k) {
+    // Vector to store the maximum values in sliding windows
+    vector<int> ans;
+    // Max heap to keep track of elements in the window along with their indices
+    priority_queue<pair<int, int>> maxHeap;
+    for(int i = 0; i < nums.size(); i++) {
+        // Push the current element into the max heap along with its index
+        maxHeap.push({nums[i], i});
+        // Remove elements from the max heap that are no longer in the current window (size k)
+        while(!maxHeap.empty() && maxHeap.top().second <= i - k) {
+            maxHeap.pop();
+        }
+        // Once the window size is reached, add the maximum element in the window to the answer
+        if(i >= k - 1) {
+            ans.push_back(maxHeap.top().first);
+        }
+    }
+    return ans;
+}
+
 int main() {
     vector<int> nums = {1,3,-1,-3,5,3,6,7};
     int k = 3;
@@ -65,6 +87,12 @@ int main() {
 
     cout<<"The Maximum element in "<<k<<" window using Dequeue approach: "<<endl;
     ans = maxSlidingWindow(nums, k);
+    for(int a : ans) {
+        cout<<a<<" ";
+    } cout<<endl;
+
+    cout<<"The Maximum element in "<<k<<" window using Max Heap approach: "<<endl;
+    ans = maxSlidingWindowMaxHeap(nums, k);
     for(int a : ans) {
         cout<<a<<" ";
     } cout<<endl;
