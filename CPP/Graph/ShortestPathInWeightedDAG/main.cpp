@@ -28,7 +28,7 @@ public:
             int u = edge[0];
             int v = edge[1];
             // If weight is not provided, default to 1
-            int w = edge[2] ? edge[2] : 1;
+            int w = edge.size() == 3 ? edge[2] : 1;
             adjacencyList[u].push_back({v, w});
         }
     }
