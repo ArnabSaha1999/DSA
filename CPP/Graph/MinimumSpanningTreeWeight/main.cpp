@@ -2,6 +2,9 @@
 #include<vector>
 #include<utility>
 #include<climits>
+#include<queue>
+#include<unordered_map>
+#include<list>
 #include<algorithm>
 
 using namespace std;
@@ -10,6 +13,8 @@ using namespace std;
 class Graph {
     // Number of nodes in the graph
     int nodes;
+    // Adjacency list representation
+    unordered_map<int, list<pair<int, int>>> adjacencyList;
 
     // Comparison function for sorting edges based on their weights in ascending order
     static bool compare(pair<pair<int, int>, int> &a, pair<pair<int, int>, int> &b) {
@@ -47,7 +52,59 @@ public:
         this->nodes = nodes;
     }
 
-    //Approach 1: Kruskal's algorithm to find the minimum spanning tree weight
+    // Function to add edges to the graph
+    void addEdge(vector<pair<pair<int, int>, int>> &edges) {
+        for(auto edge : edges) {
+            int u = edge.first.first;
+            int v = edge.first.second;
+            int w = edge.second;
+            adjacencyList[u].push_back({v, w});
+            adjacencyList[v].push_back({u, w});
+        }
+    }
+
+    //Approach 1: Prim's Algorithm to find Minimum Spanning Tree Weight
+    int minimumSpanningTreePrimsAlgo(int vertices) {
+        // Initialize vectors to store key values, MST set, and parent vertices
+        vector<int> key(vertices, INT_MAX);
+        vector<bool> mst(vertices, false);
+        vector<int> parent(vertices, -1);
+        // Use a priority queue to efficiently find the minimum key value
+        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> minHeap;
+        // Start from the first vertex
+        minHeap.push({0, 0});
+        key[0] = 0;
+        // Variable store the weight of the minimum spanning tree
+        int minAnsWeight = 0;
+        // Process vertices until the priority queue is empty
+        while(!minHeap.empty()) {
+            // Include the selected vertex in the MST
+            int minWeight = minHeap.top().first;
+            int minIndex = minHeap.top().second;
+            minHeap.pop();
+            // Check if the selected vertex is already included in the MST
+            if(mst[minIndex]) {
+                // If already included, skip to the next iteration
+                continue;
+            }
+            // Include the selected vertex in the MST
+            mst[minIndex] = true;
+            // Update the total weight of the MST
+            minAnsWeight += minWeight;
+            // Update key values and parent vertices for neighboring vertices
+            for(auto neighbor: adjacencyList[minIndex]) {
+                if(!mst[neighbor.first] && neighbor.second < key[neighbor.first]) {
+                    key[neighbor.first] = neighbor.second;
+                    parent[neighbor.first] = minIndex;
+                    minHeap.push({neighbor.second, neighbor.first});
+                }
+            }
+        }
+        // Return the weight of minimum spanning tree
+        return minAnsWeight;
+    }
+
+    //Approach 2: Kruskal's algorithm to find the minimum spanning tree weight
     int minimumSpanningTreeKrukshalsAlgo(int vertices, vector<pair<pair<int, int>, int>> &edges) {
         // Sort edges based on their weights
         sort(edges.begin(), edges.end(), compare);
@@ -84,7 +141,12 @@ int main() {
     
     Graph undirectedGraph(nodes);
     
-    int ans = undirectedGraph.minimumSpanningTreeKrukshalsAlgo(nodes, edges);
+    undirectedGraph.addEdge(edges);
+
+    int ans = undirectedGraph.minimumSpanningTreePrimsAlgo(nodes);
+    cout<<endl<<"The Minimum Spanning Tree Weight with Prim's Algo: "<<ans<<endl;
+    
+    ans = undirectedGraph.minimumSpanningTreeKrukshalsAlgo(nodes, edges);
     cout<<endl<<"The Minimum Spanning Tree Weight with Krukshal's Algo: "<<ans<<endl;
 
     return 0;
