@@ -113,7 +113,7 @@ public:
         for(int i = 0; i < vertices; i++) {
             parent[i] = i;
         }
-        vector<int> rank(vertices);
+        vector<int> rank(vertices, 0);
         // Variable store the weight of the minimum spanning tree
         int minWeight = 0;
         // Iterate through sorted edges and calculate the weight of minimum spanning tree if it doesn't form a cycle
