@@ -56,7 +56,7 @@ public:
         for(int i = 0; i < vertices; i++) {
             parent[i] = i;
         }
-        vector<int> rank(vertices);
+        vector<int> rank(vertices, 0);
         // Vector to store the edges of the minimum spanning tree
         vector<pair<pair<int, int>, int>> ans;
         // Iterate through sorted edges and add to the minimum spanning tree if it doesn't form a cycle
